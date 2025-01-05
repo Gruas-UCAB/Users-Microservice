@@ -119,7 +119,7 @@ namespace UsersMicroservice.src.user.infrastructure
 
         }
 
-        //[Authorize(Policy = "CreationalUser")]
+        [Authorize(Policy = "CreationalUser")]
         [HttpPatch("{id}")]
         public async Task<IActionResult> ToggleActivityUserById(string id)
         {

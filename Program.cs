@@ -16,7 +16,6 @@ using UsersMicroservice.src.user.application.repositories;
 using UsersMicroservice.src.user.infrastructure.dto;
 using UsersMicroservice.src.user.infrastructure.repositories;
 using UsersMicroservice.src.user.infrastructure.validators;
-using static System.Net.WebRequestMethods;
 
 var builder = WebApplication.CreateBuilder(args);
 Env.Load();
