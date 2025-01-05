@@ -1,0 +1,36 @@
+[33mcommit 37fb4f6cf05d348b39a1a390bc2b9f5fa2c0084d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mauth[m[33m, [m[1;31morigin/auth[m[33m)[m
+Author: Luis Elian Montes Garcia <luiselian.montesg@gmail.com>
+Date:   Thu Jan 2 23:41:42 2025 -0400
+
+    WORKING: Authentication and authorization
+
+[33mcommit 574b6c1bc74c5c71db08eace014e8d509cce6697[m
+Merge: b67507f c23604e
+Author: Luis Elian Montes Garcia <luiselian.montesg@gmail.com>
+Date:   Sat Dec 28 15:20:55 2024 -0400
+
+    Merge branch 'users' of https://github.com/Gruas-UCAB/Users-Microservice into auth
+
+[33mcommit b67507fff6f14b04da3111d2e101aa71c3add147[m[33m ([m[1;31morigin/development[m[33m, [m[1;32mtests[m[33m, [m[1;32mdevelopment[m[33m)[m
+Author: luiselianmg <luiselian.montesg@gmail.com>
+Date:   Sat Nov 2 20:21:00 2024 -0400
+
+    FEAT: B-GRUAS-Users-CRUD
+
+[33mcommit c23604e42ada6c8555faad689f84391d4ab39ac9[m[33m ([m[1;31morigin/users[m[33m, [m[1;32musers[m[33m)[m
+Author: luiselianmg <luiselian.montesg@gmail.com>
+Date:   Sat Nov 2 20:21:00 2024 -0400
+
+    FEAT: B-GRUAS-Users-CRUD
+
+[33mcommit f2b985e24381aeffd0653365a40807a937a57022[m
+Author: luiselianmg <luiselian.montesg@gmail.com>
+Date:   Sat Nov 2 17:20:24 2024 -0400
+
+    FEAT: B-GRUAS-Departments-CRUD
+
+[33mcommit c373994fb112cdb92881f3ded3acc5158a6656fd[m[33m ([m[1;31morigin/release-1[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mrelease-1[m[33m, [m[1;32mmain[m[33m)[m
+Author: luiselianmg <luiselian.montesg@gmail.com>
+Date:   Sat Oct 19 19:01:03 2024 -0400
+
+    FEAT: Initial commit with the application core
