@@ -26,6 +26,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton<MongoDBConfig>();
 builder.Services.AddTransient<IValidator<CreateDepartmentCommand>, CreateDepartmentCommandValidator>();
+builder.Services.AddScoped<IIdGenerator<string>, UUIDGenerator>();
 builder.Services.AddScoped<IDepartmentRepository, MongoDepartmentRepository>();
 builder.Services.AddTransient<IValidator<CreateUserCommand>, CreateUserCommandValidator>();
 builder.Services.AddTransient<IValidator<UpdateUserDto>, UpdateUserByIdValidator>();
