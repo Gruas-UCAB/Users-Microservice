@@ -22,13 +22,14 @@ namespace UsersMicroservice.src.user.infrastructure
     [Route("user")]
     [ApiController]
     [Authorize]
-    public class UserController : Controller
+    public class UserController(IUserRepository userRepository, ICredentialsRepository credentialsRepository, 
+        IDepartmentRepository departmentRepository, IIdGenerator<string> idGenerator, ICryptoService cryptoService) : Controller
     {   
-        private readonly IUserRepository _userRepository = new MongoUserRepository();
-        private readonly ICredentialsRepository _credentialsRepository = new MongoCredentialsRepository();
-        private readonly IDepartmentRepository _departmentRepository = new MongoDepartmentRepository();
-        private readonly IIdGenerator<string> _idGenerator = new UUIDGenerator();
-        private readonly ICryptoService _cryptoservice = new BcryptService();
+        private readonly IUserRepository _userRepository = userRepository;
+        private readonly ICredentialsRepository _credentialsRepository = credentialsRepository;
+        private readonly IDepartmentRepository _departmentRepository = departmentRepository;
+        private readonly IIdGenerator<string> _idGenerator = idGenerator;
+        private readonly ICryptoService _cryptoservice = cryptoService;
 
         [Authorize(Policy = "CreationalUser")]
         [HttpPost]
