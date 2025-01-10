@@ -14,10 +14,10 @@ namespace UsersMicroservice.src.department.infrastructure
     [Route("department")]
     [ApiController]
     [Authorize]
-    public class DepartmentController : Controller
+    public class DepartmentController(IDepartmentRepository departmentRepository, IIdGenerator<string> idGenerator) : Controller
     {
-        private readonly IDepartmentRepository _departmentRepository = new MongoDepartmentRepository();
-        private readonly IIdGenerator<string> _idGenerator = new UUIDGenerator();
+        private readonly IDepartmentRepository _departmentRepository = departmentRepository;
+        private readonly IIdGenerator<string> _idGenerator = idGenerator;
 
         [Authorize(Policy = "CreationalUser")]
         [HttpPost]
