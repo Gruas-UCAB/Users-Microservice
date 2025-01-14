@@ -63,8 +63,14 @@ builder.Services.AddScoped<ITokenAuthenticationService, JwtService>();
 builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection("SMTP"));
 builder.Services.AddTransient<EmailSenderService>();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
+app.UseCors(builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseRouting();
