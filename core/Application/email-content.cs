@@ -2,8 +2,7 @@
 {
     public record EmailContent
     (
-        string to,
-        string subject,
-        string body
+        string Subject,
+        string Body
     );
 }

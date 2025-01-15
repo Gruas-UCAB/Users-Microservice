@@ -5,32 +5,24 @@ using UsersMicroservice.core.Infrastructure;
 using UsersMicroservice.src.auth.application.commands.login;
 using UsersMicroservice.src.auth.application.commands.login.types;
 using UsersMicroservice.src.auth.application.repositories;
-using UsersMicroservice.src.auth.infrastructure.repositories;
 using UsersMicroservice.src.user.application.repositories;
-using UsersMicroservice.src.user.infrastructure.repositories;
 
 namespace UsersMicroservice.src.auth.infrastructure
 {
     [Route("auth")]
     [ApiController]
-    public class AuthController : Controller
+    public class AuthController(
+        ICredentialsRepository credentialsRepository,
+        IUserRepository userRepository,
+        ICryptoService cryptoService,
+        ITokenAuthenticationService tokenAuthenticationService,
+        IConfiguration configuration) : Controller
     {
-        private readonly ICredentialsRepository _credentialsRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly ICryptoService _cryptoService;
-        private readonly ITokenAuthenticationService _tokenAuthenticationService;
-
-        public AuthController(
-            ICredentialsRepository credentialsRepository,
-            IUserRepository userRepository,
-            ICryptoService cryptoService,
-            ITokenAuthenticationService tokenAuthenticationService)
-        {
-            _credentialsRepository = credentialsRepository;
-            _userRepository = userRepository;
-            _cryptoService = cryptoService;
-            _tokenAuthenticationService = tokenAuthenticationService;
-        }
+        private readonly ICredentialsRepository _credentialsRepository = credentialsRepository;
+        private readonly IUserRepository _userRepository = userRepository;
+        private readonly ICryptoService _cryptoService = cryptoService;
+        private readonly ITokenAuthenticationService _tokenAuthenticationService = tokenAuthenticationService;
+        private readonly IConfiguration _configuration = configuration;
 
         [AllowAnonymous]
         [HttpPost("login")]
@@ -57,6 +49,21 @@ namespace UsersMicroservice.src.auth.infrastructure
                 token = data.AccessToken,
                 expiresIn = data.ExpiresIn
             });
+        }
+
+        [HttpPost("email")]
+        public async Task<IActionResult> SendEmail()
+        {
+            try
+            {
+                var service = new EmailSenderService(_configuration);
+                await service.SendEmail("luiselian001@gmail.com", new EmailContent("prueba", "body de la prueba"));
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {ErrorMessage = e.Message});
+            }
         }
     }
 }
