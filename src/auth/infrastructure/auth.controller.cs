@@ -13,6 +13,7 @@ namespace UsersMicroservice.src.auth.infrastructure
 {
     [Route("auth")]
     [ApiController]
+  
     public class AuthController : Controller
     {
         private readonly ICredentialsRepository _credentialsRepository;

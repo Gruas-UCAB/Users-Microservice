@@ -1,7 +1,9 @@
 using DotNetEnv;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 using UsersMicroservice.core.Application;
 using UsersMicroservice.core.Infrastructure;
@@ -63,6 +65,14 @@ builder.Services.AddScoped<ITokenAuthenticationService, JwtService>();
 builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection("SMTP"));
 builder.Services.AddTransient<EmailSenderService>();
 
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Users Microservice API", Version = "v1" });
+});
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
@@ -71,4 +81,10 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
 
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Users Microservice API v1");
+   
+});
 app.Run();
