@@ -47,7 +47,7 @@ namespace UsersMicroservice.src.department.infrastructure
             if (!departments.HasValue())
             {
                 return NotFound(
-                    new { errorMessage = new DepartmentNotFoundException().Message }
+                    new { errorMessage = new NoDepartmentsFoundException().Message }
                     );
             }
 
