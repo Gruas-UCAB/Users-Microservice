@@ -7,5 +7,6 @@ namespace UsersMicroservice.src.auth.application.repositories
         Task<_Optional<Credentials>> GetCredentialsByEmail(string email);
         Task<_Optional<Credentials>> GetCredentialsByUserId(string userId);
         Task<string> AddCredentials(Credentials credentials);
+        Task UpdateCredentials(string userId ,string? email, string? password);
     }
 }

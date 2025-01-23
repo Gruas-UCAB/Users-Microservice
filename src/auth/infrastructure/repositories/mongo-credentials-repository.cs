@@ -5,6 +5,7 @@ using UsersMicroservice.core.Infrastructure;
 using UsersMicroservice.src.auth.application.models;
 using UsersMicroservice.src.auth.application.repositories;
 using UsersMicroservice.src.auth.infrastructure.models;
+using UsersMicroservice.src.user.application.repositories.exceptions;
 using UsersMicroservice.src.user.domain;
 using UsersMicroservice.src.user.domain.value_objects;
 
@@ -43,6 +44,24 @@ namespace UsersMicroservice.src.auth.infrastructure.repositories
             await credentialsCollection.InsertOneAsync(bsonDocument);
 
             return credentials.Id;
+        }
+
+        public async Task UpdateCredentials(string userId, string? email, string? password)
+        {
+            var credentialsFind = await GetCredentialsByUserId(userId);
+            if (!credentialsFind.HasValue())
+                throw new UserNotFoundException();
+            var filter = Builders<BsonDocument>.Filter.Eq("userId", userId);
+            var update = Builders<BsonDocument>.Update.Set("updatedAt", DateTime.Now);
+            if (email != null)
+            {
+                update = update.Set("email", email);
+            }
+            if (password != null)
+            {
+                update = update.Set("password", password);
+            }
+            await credentialsCollection.UpdateOneAsync(filter, update);
         }
 
         public async Task<_Optional<Credentials>> GetCredentialsByEmail(string email)

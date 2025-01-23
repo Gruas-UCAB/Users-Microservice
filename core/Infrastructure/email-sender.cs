@@ -25,7 +25,7 @@ namespace UsersMicroservice.core.Infrastructure
                 From = new MailAddress(mail, name),
                 Subject = data.Subject,
                 Body = data.Body,
-                IsBodyHtml = true
+                IsBodyHtml = false
             };
             mailMessage.To.Add(to);
             await client.SendMailAsync(mailMessage);
